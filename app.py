@@ -13,9 +13,9 @@ def salvar_dados(dados):
     with open(ARQUIVO, "w") as f:
         json.dump(dados, f, indent=4)
 
-# CREATE
-@app.route("/tarefas", methods=["POST"])
-def criar():
+# CREATE - cadastrar questão
+@app.route("/questoes", methods=["POST"])
+def criar_questao():
     dados = ler_dados()
     nova = request.json
 
@@ -25,32 +25,43 @@ def criar():
     salvar_dados(dados)
     return jsonify(nova), 201
 
-# READ
-@app.route("/tarefas", methods=["GET"])
-def listar():
+# READ - listar questões
+@app.route("/questoes", methods=["GET"])
+def listar_questoes():
     return jsonify(ler_dados())
 
-# UPDATE
-@app.route("/tarefas/<int:id>", methods=["PUT"])
-def atualizar(id):
+# READ - buscar por ID
+@app.route("/questoes/<int:id>", methods=["GET"])
+def buscar_questao(id):
     dados = ler_dados()
 
-    for tarefa in dados:
-        if tarefa["id"] == id:
-            tarefa.update(request.json)
+    for q in dados:
+        if q["id"] == id:
+            return jsonify(q)
+
+    return {"erro": "Questão não encontrada"}, 404
+
+# UPDATE - atualizar questão
+@app.route("/questoes/<int:id>", methods=["PUT"])
+def atualizar_questao(id):
+    dados = ler_dados()
+
+    for q in dados:
+        if q["id"] == id:
+            q.update(request.json)
             salvar_dados(dados)
-            return jsonify(tarefa)
+            return jsonify(q)
 
-    return {"erro": "Não encontrado"}, 404
+    return {"erro": "Questão não encontrada"}, 404
 
-# DELETE
-@app.route("/tarefas/<int:id>", methods=["DELETE"])
-def deletar(id):
+# DELETE - excluir questão
+@app.route("/questoes/<int:id>", methods=["DELETE"])
+def deletar_questao(id):
     dados = ler_dados()
 
-    novos = [t for t in dados if t["id"] != id]
+    novos = [q for q in dados if q["id"] != id]
 
     salvar_dados(novos)
-    return {"msg": "Deletado"}
+    return {"msg": "Questão deletada"}
 
 app.run(debug=True)
