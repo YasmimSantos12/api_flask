@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "pergunta": "Qual \u00e9 a capital do Brasil?",
+        "alternativas": [
+            "A) SP",
+            "B) RJ",
+            "C) Bras\u00edlia",
+            "D) BH"
+        ],
+        "resposta": "C",
+        "disciplina": "Geografia",
+        "id": 1
+    }
+]
