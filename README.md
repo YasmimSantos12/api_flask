@@ -11,7 +11,7 @@ Permite realizar operações de CRUD (Create, Read, Update, Delete) utilizando u
 ## ⚙️ Como executar o projeto
 
 1. Clone o repositório:
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/YasmimSantos12/api_flask.git
 
 2. Acesse a pasta:
 cd seu-repositorio
